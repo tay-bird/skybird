@@ -4,7 +4,7 @@ from flask import render_template, url_for, request, redirect
 from flask.ext.stormpath import login_required
 from flask.ext.sqlalchemy import SQLAlchemy
 
-from interface import app
+from interface import app, config
 app.config["SQLALCHEMY_DATABASE_URI"] = config["DOC_MANAGER"]["SQLALCHEMY_DATABASE_URI"]
 app.config["UPLOADS_FOLDER"] = config["DOC_MANAGER"]["UPLOADS_FOLDER"]
 
