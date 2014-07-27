@@ -1,3 +1,5 @@
+""" Server the document manager. """
+
 from flask import render_template, url_for, request, redirect
 from flask.ext.stormpath import login_required
 from flask.ext.sqlalchemy import SQLAlchemy

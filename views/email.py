@@ -1,3 +1,5 @@
+""" Serve the email client. """
+
 import json
 from os import getpid
 from time import time

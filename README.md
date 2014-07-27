@@ -8,8 +8,12 @@ used to initiate a call to the Flask logic.
 
 ### Authentication.
 User authentication is handled with the **Flask-Stormpath** extension.
-A valid Stormpath API key and app name must be pointed to in the
+A valid **Stormpath API key** and **app name** must be pointed to in the
 **CONFIG** file.
+
+### Stats.
+Stats monitoring is provided by the **psutil** package. It is available
+online.
 
 ### Email.
 Email functionality is provided by the **Mailchecker** package. A

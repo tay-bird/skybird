@@ -1,3 +1,5 @@
+""" Serve the dashboard. """
+
 import json
 from os import getpid
 from time import time

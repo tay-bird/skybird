@@ -1,3 +1,5 @@
+""" Serve the splash page. """
+
 from flask import render_template
 
 from interface import app
