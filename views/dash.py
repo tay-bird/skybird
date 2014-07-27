@@ -8,7 +8,7 @@ from flask import render_template
 from flask.ext.stormpath import login_required
 from psutil import disk_usage, Process, net_connections
 
-from interface import app
+from interface import app, config
 
 @app.route("/dash")
 @login_required
@@ -35,7 +35,7 @@ def dash():
 			cons.append(con)
 	
 	# Get mail count in inbox.
-	f = open("/home/taybird/projects/mailchecker/mail.json", "r")
+	f = open(config["EMAIL"]["MAIL_STORAGE"], "r")
 	mail = f.read()
 	f.close()
 	mail_count = len(json.loads(mail))
