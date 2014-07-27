@@ -1,0 +1,62 @@
+{% extends "dash_base.html" %}
+
+{% block title %}Email{%endblock%}
+   
+{% block sidebar %}
+
+    <ul class="nav nav-sidebar">
+        <li class="active"><a href="/dash">Overview</a></li>
+        <li><a href="#">taylor@taybird.com</a></li>
+    </ul>
+    <ul class="nav nav-sidebar">
+        <li><a href="">Inbox</a></li>
+        <li><a href="">Sent</a></li>
+        <li><a href="">Trash</a></li>
+    </ul>
+    
+{% endblock %}
+
+{% block header %}Email{% endblock %}
+
+{% block body %}
+
+    <div class="row placeholders">
+        <div class="col-xs-6 col-sm-3 placeholder">
+            <a href="">
+                <span class="glyphicon glyphicon-envelope"></span>
+                <h4>Send Message</h4>
+            </a>
+            <span class="text-muted">taylor@taybird.com</span>
+        </div>
+        <div class="col-xs-6 col-sm-3 placeholder">
+            <a href="">
+                <span class="glyphicon glyphicon-calendar"></span>
+                <h4>0 Events</h4>
+            </a>
+            <span class="text-muted">Upcoming Events</span>
+        </div>
+    </div>
+
+    <h2 class="sub-header">New Messages</h2>
+    <div class="table-responsive">
+        <table class="table table-striped" width="70%">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Subject</th>
+                    <th>Message</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for message in mail %}
+                    <tr>
+                        <td width="18%">{{ message['from'][0] }} - {{ message['from'][1] }}</td>
+                        <td width="20%">{{ message['subject'] }}</td>
+                        <td width="62%">{{ message['body'] }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+{% endblock %}

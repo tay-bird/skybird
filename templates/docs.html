@@ -1,0 +1,46 @@
+{% extends "dash_base.html" %}
+
+{% block title %}Document Manager{%endblock%}
+   
+{% block sidebar %}
+
+    <ul class="nav nav-sidebar">
+        <li><a href="/dash">Overview</a></li>
+        <li><a href="#">Live Status</a></li>
+    </ul>
+    
+    <ul class="nav nav-sidebar">
+        <li><a href="">WWW Config</a></li>
+        <li><a href="">Skybird Config</a></li>
+    </ul>
+    
+    <ul class="nav nav-sidebar">
+        <li class="active"><a href="/docs">Document Manager</a></li>
+    </ul>
+    
+{% endblock %}
+
+{% block header %}Document Manager{% endblock %}
+
+{% block body %}
+
+    <!-- Shortcuts -->
+    <div class="row placeholders">
+        <div class="col-xs-6 col-sm-3 placeholder">
+            <a href="#">
+                <span class="glyphicon glyphicon-envelope"></span>
+                <h4>Upload File</h4>
+            </a>
+            <span class="text-muted">files://root/</span>
+        </div>
+    </div>
+
+    <!-- Upload -->
+    <h2 class="sub-header">Upload New</h2>
+        <form method=POST enctype=multipart/form-data action="{{ url_for('docs') }}">
+            <input type="file" name="upload" size="chars" />
+            <input type="submit" name="submit" value="Submit" />
+        </form>
+    </div>
+
+{% endblock %}

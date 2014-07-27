@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="icon" href="/static/favicon.ico">
+
+        <title>Skybird {% block title %}{% endblock %}</title>
+
+        <!-- Bootstrap core CSS -->
+        <link href="static/css/bootstrap.css" rel="stylesheet">
+
+        <!-- Custom styles for this template -->
+        <link href="static/css/dashboard.css" rel="stylesheet">
+    </head>
+
+    <body>
+
+        <!-- Topbar -->
+        <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="#">Skybird</a>
+                </div>
+                <div class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a href="/dash">Dashboard</a></li>
+                        <li><a href="/email">Email</a></li>
+                        <li><a href="/logout">Logout</a></li>
+                    </ul>
+                    <form class="navbar-form navbar-right">
+                        <input type="text" class="form-control" placeholder="Search...">
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main container -->
+        <div class="container-fluid">
+            <div class="row">
+            
+                <!-- Sidebar -->
+                <div class="col-sm-3 col-md-2 sidebar">
+                    {% block sidebar %}{% endblock %}
+                </div>
+                
+                <!-- Main info display -->
+                <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+                    <h1 class="page-header">{% block header %}{% endblock %}</h1>
+                    {% block body %}{% endblock %}
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="inner">
+            <p>Cover template by <a href="https://twitter.com/mdo">@mdo</a>.</p>
+        </div>
+
+        <!-- Bootstrap JavaScript -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+        <script src="static/js/bootstrap.js"></script>
+        <script src="static/js/docs.min.js"></script>
+
+    </body>
+</html>

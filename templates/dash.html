@@ -1,0 +1,82 @@
+{% extends "dash_base.html" %}
+
+{% block title %}Dashboard{%endblock%}
+   
+{% block sidebar %}
+
+    <ul class="nav nav-sidebar">
+        <li class="active"><a href="/dash">Overview</a></li>
+        <li><a href="#">Live Status</a></li>
+    </ul>
+    
+    <ul class="nav nav-sidebar">
+        <li><a href="">WWW Config</a></li>
+        <li><a href="">Skybird Config</a></li>
+    </ul>
+    
+    <ul class="nav nav-sidebar">
+        <li><a href="/docs">Document Manager</a></li>
+    </ul>
+    
+{% endblock %}
+
+{% block header %}Dashboard{% endblock %}
+
+{% block body %}
+
+    <!-- Shortcuts -->
+    <div class="row placeholders">
+        <div class="col-xs-6 col-sm-3 placeholder">
+            <a href="/email">
+                <span class="glyphicon glyphicon-envelope"></span>
+                <h4>{{ mail_count }} Emails</h4>
+            </a>
+            <span class="text-muted">New Emails</span>
+        </div>
+        <div class="col-xs-6 col-sm-3 placeholder">
+            <a href="/calendar">
+                <span class="glyphicon glyphicon-calendar"></span>
+                <h4>0 Events</h4>
+            </a>
+            <span class="text-muted">Upcoming Events</span>
+        </div>
+        <div class="col-xs-6 col-sm-3 placeholder">
+            <a href="/stats#uptime">
+                <span class="glyphicon glyphicon-off"></span>
+                <h4>{{ uptime }} Hours</h4>
+            </a>
+            <span class="text-muted">Skybird Uptime</span>
+        </div>
+        <div class="col-xs-6 col-sm-3 placeholder">
+            <a href="/stats#disk">
+                <span class="glyphicon glyphicon-transfer"></span>
+                <h4>{{ usage }} %</h4>
+            </a>
+            <span class="text-muted">Skybird Disk Usage</span>
+        </div>
+    </div>
+
+    <!-- Open connections -->
+    <h2 class="sub-header">Open Connections</h2>
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Address</th>
+                    <th>Port</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for ip, port, status in cons %}
+                    <tr>
+                    <td>{{ ip }}</td>
+                        <td>{{ port }}</td>
+                        <td>{{ status }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+{% endblock %}
