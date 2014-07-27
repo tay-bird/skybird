@@ -14,6 +14,11 @@ app.config['STORMPATH_ENABLE_REGISTRATION'] = False
 
 user_manage = StormpathManager(app)
 
+f = open('CONFIG')
+j = f.read()
+f.close()
+config = json.loads(j)
+
 import views
 import interface.views
 
