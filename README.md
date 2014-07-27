@@ -7,14 +7,19 @@ Skybird is run on **Flask**. On the server, a **wsgi python file** is
 used to initiate a call to the Flask logic.
 
 ### Authentication.
-User authentication is handled with the **Flask-Stormpth** extension.
+User authentication is handled with the **Flask-Stormpath** extension.
 A valid Stormpath API key and app name must be pointed to in the
 **CONFIG** file.
 
 ### Email.
-Email functionality is provided by the Mailchecker package. A
+Email functionality is provided by the **Mailchecker** package. A
 valid Mailchecker **mail.json** file must be pointed to in the
 **CONFIG** file.
+
+### Documents.
+Document management is handled with the **Flask-SQLAlchemy** extension.
+A valid **sqlite database** and an accessable **uploads folder** must be
+pointed to in the **CONFIG** file.
 
 ## Usage.
 Import the app object from the interface package. Pass it a
