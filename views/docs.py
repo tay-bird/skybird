@@ -12,6 +12,7 @@ from interface import app, config
 config = config["DOC_MANAGER"]
 app.config["SQLALCHEMY_DATABASE_URI"] = config["SQLALCHEMY_DATABASE_URI"]
 app.config["UPLOADS_FOLDER"] = config["UPLOADS_FOLDER"]
+app.config['MAX_CONTENT_LENGTH'] = config["MAX_SIZE_IN_MB"] * 1024 * 1024
 
 ALLOWED_EXTENSIONS = set(['txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'])
 
@@ -23,6 +24,12 @@ def allowed_file(filename):
 @app.route("/docs", methods=['GET', 'POST'])
 @login_required
 def docs():
+    """ Serve the document manager overview page. """
+    return render_template('docs.html')
+
+@app.route("/upload")
+@login_required
+def upload():
     """ Serve the upload page and accept uploads. """
     if request.method == 'POST':
         print request.form['name']
@@ -32,9 +39,4 @@ def docs():
             filename = secure_filename(file.filename)
             file.save(os.path.join(app.config['UPLOADS_FOLDER'], filename))
             return redirect(url_for('docs'))
-    return render_template('docs.html')
-
-@app.route("/upload")
-@login_required
-def upload():
-    return render_template('docs.html')
+    return render_template('upload.html')

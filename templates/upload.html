@@ -27,7 +27,7 @@
     <!-- Shortcuts -->
     <div class="row placeholders">
         <div class="col-xs-6 col-sm-3 placeholder">
-            <a href="/upload">
+            <a href="#">
                 <span class="glyphicon glyphicon-envelope"></span>
                 <h4>Upload File</h4>
             </a>
@@ -35,4 +35,14 @@
         </div>
     </div>
 
+    <!-- Upload -->
+    <h2 class="sub-header">Upload New</h2>
+        <form method=POST enctype=multipart/form-data action="{{ url_for('docs') }}">
+            <input type="text" name="name" placeholder="Document Name" />
+            <input type="file" name="file" size="chars" />
+            <input type="submit" name="submit" value="Submit" />
+        </form>
+    </div>
+
 {% endblock %}
+
