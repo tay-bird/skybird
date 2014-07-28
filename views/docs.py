@@ -25,7 +25,8 @@ def allowed_file(filename):
 @login_required
 def docs():
     """ Serve the document manager overview page. """
-    return render_template('docs.html')
+    files = os.listdir(app.config["UPLOADS_FOLDER"])
+    return render_template('docs.html', files=files)
 
 @app.route("/upload")
 @login_required
