@@ -1,6 +1,6 @@
 {% extends "dash_base.html" %}
 
-{% block title %}Document Manager{%endblock%}
+{% block title %}Document Manager{% if location %} - files://{{ location }}{% endif %}{%endblock%}
    
 {% block sidebar %}
 
