@@ -1,17 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="icon" href="/static/favicon.ico">
+        {% block html_head %}
+            <meta charset="utf-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1">
+            <link rel="icon" href="/static/favicon.ico">
 
-        <title>Skybird {% block title %}{% endblock %}</title>
+            <title>Skybird {% block title %}{% endblock %}</title>
 
-        <!-- Bootstrap core CSS -->
-        <link href="static/css/bootstrap.css" rel="stylesheet">
+            <!-- Bootstrap core CSS -->
+            <link href="static/css/bootstrap.css" rel="stylesheet">
 
-        <!-- Custom styles for this template -->
-        <link href="static/css/dashboard.css" rel="stylesheet">
+            <!-- Custom styles for this template -->
+            <link href="static/css/dashboard.css" rel="stylesheet">
+        {% endblock %}
     </head>
 
     <body>

@@ -21,23 +21,31 @@ def allowed_file(filename):
     return '.' in filename and \
            filename.rsplit('.', 1)[1] in ALLOWED_EXTENSIONS
 
-@app.route("/docs", methods=['GET', 'POST'])
+@app.route("/docs")
 @login_required
 def docs():
     """ Serve the document manager overview page. """
-    files = os.listdir(app.config["UPLOADS_FOLDER"])
+    files = []
+    filenames = os.listdir(app.config["UPLOADS_FOLDER"])
+        
+    for name in filenames:
+        path = os.path.join(app.config["UPLOADS_FOLDER"], name)
+        files.append({ 'size': os.path.getsize(path)/1024,
+                       'type': 'file',
+                       'name': name })
+    
     return render_template('docs.html', files=files)
 
-@app.route("/upload")
+@app.route("/upload", methods=['GET', 'POST'])
 @login_required
 def upload():
     """ Serve the upload page and accept uploads. """
     if request.method == 'POST':
-        print request.form['name']
         file = request.files['file']
         
         if file and allowed_file(file.filename):
             filename = secure_filename(file.filename)
             file.save(os.path.join(app.config['UPLOADS_FOLDER'], filename))
             return redirect(url_for('docs'))
+            
     return render_template('upload.html')
