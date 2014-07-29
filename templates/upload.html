@@ -66,8 +66,8 @@
             <div class="col-xs-12 col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">  
                 <!-- image-preview-filename input [CUT FROM HERE]-->
                 <div class="input-group image-preview">
+                    
                     <form method=POST enctype=multipart/form-data action="{{ url_for('upload') }}">
-                        <input type="text" name="name" placeholder="Document Name" />
                         <input type="text" class="form-control image-preview-filename" disabled="disabled"> <!-- don't give a name === doesn't send on POST/GET -->
                         <span class="input-group-btn">
                             <!-- image-preview-clear button -->
@@ -82,6 +82,7 @@
                             </div>
                         </span>
                     </form>
+                    
                 </div><!-- /input-group image-preview [TO HERE]--> 
             </div>
         </div>
