@@ -33,7 +33,7 @@ def docs():
         path = os.path.join(app.config["UPLOADS_FOLDER"], name)
         files.append({ 'size': os.path.getsize(path)/1024,
                        'type': name.rsplit('.', 1)[1],
-                       'name': name })
+                       'name': name.rsplit('.', 1)[0] })
     
     return render_template('docs.html', files=files)
 
