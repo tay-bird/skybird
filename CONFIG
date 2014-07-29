@@ -1,0 +1,10 @@
+{ "STORMPATH":
+      { "STORMPATH_API_KEY_FILE": "/path/to/keys/apiKey.properties",
+        "STORMPATH_APPLICATION": "**APP_NAME**" },
+  "EMAIL":
+      { "MAIL_STORAGE": "/path/to/mailchecker/mail.json" },
+  "DOC_MANAGER":
+      { "SQLALCHEMY_DATABASE_URI": "sqlite:////tmp/test.db",
+        "UPLOADS_FOLDER": "/path/to/docmanager/root/",
+        "MAX_SIZE_IN_MB": 50 }
+  }
