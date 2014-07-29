@@ -62,12 +62,12 @@
     <!-- Uploader by iosdsv -->    
     <div class="container">
         <div class="row">
-            <h4>files://</h4>  
+            <h4>files://{{ location }}/</h4>  
             <div class="col-xs-12 col-md-6 col-md-offset-1 col-sm-8 col-sm-offset-2">  
                 <!-- image-preview-filename input [CUT FROM HERE]-->
                 <div class="input-group image-preview">
                     
-                    <form method=POST enctype=multipart/form-data action="{{ url_for('upload') }}">
+                    <form method=POST enctype=multipart/form-data action="{{ url_for('upload') }}{{ location }}">
                         <input type="text" class="form-control image-preview-filename" disabled="disabled"> <!-- don't give a name === doesn't send on POST/GET -->
                         <span class="input-group-btn">
                             <!-- image-preview-clear button -->

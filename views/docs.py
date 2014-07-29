@@ -31,28 +31,78 @@ def docs():
         
     for name in filenames:
         path = os.path.join(app.config["UPLOADS_FOLDER"], name)
+        try:
+            type = name.rsplit('.', 1)[1]
+        except IndexError:
+            type = ''
         files.append({ 'size': os.path.getsize(path)/1024,
-                       'type': name.rsplit('.', 1)[1],
+                       'type': type,
                        'name': name.rsplit('.', 1)[0] })
     
-    return render_template('docs.html', files=files)
+    return render_template('docs.html', location='', files=files)
+
+@app.route("/docs/dir/<directory>")
+@login_required
+def dir(directory):
+    """ Serve the subdirectory page. """
+    files = []
+    filenames = os.listdir(os.path.join(app.config["UPLOADS_FOLDER"], directory))
+        
+    for name in filenames:
+        path = os.path.join(app.config["UPLOADS_FOLDER"], directory, name)
+        try:
+            type = name.rsplit('.', 1)[1]
+        except IndexError:
+            type = ''
+        files.append({ 'size': os.path.getsize(path)/1024,
+                       'type': type,
+                       'name': name.rsplit('.', 1)[0] })
+    
+    loc = ''
+    if directory:
+        loc ='/' + directory
+    
+    return render_template('docs.html', location=loc, files=files)
 
 @app.route("/docs/upload", methods=['GET', 'POST'])
+@app.route("/docs/upload/<directory>", methods=['GET', 'POST'])
 @login_required
-def upload():
+def upload(directory=None):
     """ Serve the upload page and accept uploads. """
     if request.method == 'POST':
         file = request.files['file']
         
         if file and _allowed_file(file.filename):
             filename = secure_filename(file.filename)
-            file.save(os.path.join(app.config['UPLOADS_FOLDER'], filename))
+            if directory:
+                file.save(os.path.join(app.config['UPLOADS_FOLDER'],
+                                       directory, filename))
+            else:
+                file.save(os.path.join(app.config['UPLOADS_FOLDER'], filename))
             return redirect(url_for('docs'))
-            
-    return render_template('upload.html')
+    
+    loc = ''
+    if directory:
+        loc ='/' + directory
+        
+    return render_template('upload.html', location=loc)
 
-@app.route('/docs/<filename>/')
+@app.route('/docs/new/<newdir>/')
+@login_required
+def new(newdir):
+    """ Create a new directory. """
+    path = os.path.join(app.config['UPLOADS_FOLDER'], newdir)
+    
+    try:
+        os.makedirs(path)
+    except OSError:
+        pass
+    
+    return redirect(url_for('docs'))
+
+@app.route('/docs/view/<filename>/')
 @login_required
 def uploaded_file(filename):
+    """ Return the specified file. """
     return send_from_directory(app.config['UPLOADS_FOLDER'],
                                secure_filename(filename))

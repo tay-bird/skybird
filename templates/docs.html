@@ -27,7 +27,7 @@
     <!-- Shortcuts -->
     <div class="row placeholders">
         <div class="col-xs-6 col-sm-3 placeholder">
-            <a href="/docs/upload">
+            <a href="/docs/upload{{ location }}">
                 <span class="glyphicon glyphicon-cloud-upload"></span>
                 <h4>Upload File</h4>
             </a>
@@ -46,7 +46,7 @@
     
     <div class="row">
         <div class="col-md-12">
-            <h4>files://</h4>
+            <h4>files://{{ location }}/</h4>
             
                 <div class="table-responsive">
                     <table id="mytable" class="table table-bordred table-striped">
@@ -64,17 +64,25 @@
                             <tr>
                                 <td><input type="checkbox" class="checkthis" /></td>
                                 <td>
-                                    <a href="/docs/{{ file['name'] }}.{{ file['type'] }}">{{ file['name'] }}</a>
+                                    {% if file['type'] %}<a href="/docs/view/{{ file['name'] }}.{{ file['type'] }}">{{ file['name'] }}</a>{% endif %}
+                                    {% if not file['type'] %}<a href="/docs/dir/{{ file['name'] }}"><b>{{ file['name'] }}</b></a>{% endif %}
                                 </td>
                                 <td>{{ file['type'] }}</td>
-                                <td>{{ file['size'] }} kB</td>
+                                <td>{% if file['type'] %}{{ file['size'] }} kB{% endif %}</td>
                                 <td>
-                                    <p>
-                                        <a href="/static/docmanager/root/{{ file['name'] }}.{{ file['type'] }}" download="test.txt">
-                                            <button class="btn btn-primary btn-xs">
-                                                <span class="glyphicon glyphicon-cloud-download"></span>
-                                            </button>
-                                        </a>
+                                    <p> 
+                                        {% if not file['type'] %}
+                                                <button class="btn btn-primary btn-xs disabled">
+                                                    <span class="glyphicon glyphicon-cloud-download"></span>
+                                                </button>
+                                        {% endif %}
+                                        {% if file['type'] %}
+                                            <a href="/static/docmanager/root/{{ file['name'] }}.{{ file['type'] }}" download="{{ file['name'] }}.{{ file['type'] }}">
+                                                <button class="btn btn-primary btn-xs">
+                                                    <span class="glyphicon glyphicon-cloud-download"></span>
+                                                </button>
+                                            </a>
+                                        {% endif %}
                                     </p>
                                 </td>
                                 <td>
