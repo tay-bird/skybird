@@ -27,7 +27,7 @@
     <!-- Shortcuts -->
     <div class="row placeholders">
         <div class="col-xs-6 col-sm-3 placeholder">
-            <a href="/upload">
+            <a href="/docs/upload">
                 <span class="glyphicon glyphicon-envelope"></span>
                 <h4>Upload File</h4>
             </a>
@@ -59,7 +59,7 @@
                             <tr>
                                 <td><input type="checkbox" class="checkthis" /></td>
                                 <td>
-                                    <a href="#">{{ file['name'] }}</a>
+                                    <a href="docs/{{ file['name'] }}">{{ file['name'] }}</a>
                                 </td>
                                 <td>{{ file['size'] }} kB</td>
                                 <td>{{ file['type'] }}</td>
