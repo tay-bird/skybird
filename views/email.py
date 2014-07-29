@@ -12,7 +12,6 @@ from interface import app, config
 @app.route("/email")
 @login_required
 def email():
-    """ Serve the email page. """
     f = open(config["EMAIL"]["MAIL_STORAGE"],"r")
     raw_mail = f.read()
     f.close()

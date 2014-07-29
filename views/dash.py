@@ -13,10 +13,6 @@ from interface import app, config
 @app.route("/dash")
 @login_required
 def dash():
-    """ Serve the dashboard overview.
-    
-    Reads /proc/ and uses psutil to gather system stats.
-    """
     # Get Apache uptime. Not currently used. Add to full stat view?
     now = time()
     boot = Process(getpid()).create_time()
