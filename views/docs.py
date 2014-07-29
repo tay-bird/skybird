@@ -51,7 +51,7 @@ def upload():
             
     return render_template('upload.html')
 
-@app.route('/docs/<filename>')
+@app.route('/docs/<filename>/')
 @login_required
 def uploaded_file(filename):
     return send_from_directory(app.config['UPLOADS_FOLDER'],
