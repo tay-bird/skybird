@@ -87,11 +87,13 @@ def upload(directory=None):
         
     return render_template('upload.html', location=loc)
 
-@app.route('/docs/new/<newdir>/')
+@app.route('/docs/new', methods=['POST'])
 @login_required
-def new(newdir):
+def new():
     """ Create a new directory. """
-    path = os.path.join(app.config['UPLOADS_FOLDER'], newdir)
+    name = request.form['name']
+    
+    path = os.path.join(app.config['UPLOADS_FOLDER'], name)
     
     try:
         os.makedirs(path)
