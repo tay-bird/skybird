@@ -1,6 +1,6 @@
 #!/home/taybird/www/venv/bin/python
 
-import os, json
+import os, json, random, string
 
 from flask import Flask
 from flask.ext.stormpath import StormpathManager
@@ -13,7 +13,7 @@ j = f.read()
 f.close()
 config = json.loads(j)
 
-app.config["SECRET_KEY"] = "***REMOVED***"
+app.config["SECRET_KEY"] = ''.join(random.choice(string.ascii_letters) for _ in range(32))
 app.config["STORMPATH_API_KEY_FILE"] = config["STORMPATH"]["STORMPATH_API_KEY_FILE"]
 app.config["STORMPATH_APPLICATION"] = config["STORMPATH"]["STORMPATH_APPLICATION"]
 
