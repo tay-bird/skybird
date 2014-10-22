@@ -102,19 +102,10 @@ def new():
     
     return redirect(url_for('docs'))
     
-@app.route('/docs/delete', methods=['POST'])
+@app.route('/docs/delete')
 @login_required
 def delete():
     """ Create a new directory. """
-    name = request.form['name']
-    
-    path = os.path.join(app.config['UPLOADS_FOLDER'], name)
-    
-    try:
-        os.makedirs(path)
-    except OSError:
-        pass
-    
     return redirect(url_for('docs'))
 
 @app.route('/docs/view/<filename>/')
