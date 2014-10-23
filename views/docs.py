@@ -41,9 +41,9 @@ def docs():
     
     return render_template('docs.html', location='', files=files)
 
-@app.route("/docs/dir/<directory>")
+@app.route("/docs/<directory>")
 @login_required
-def dir(directory):
+def docs_subdir(directory):
     """ Serve the subdirectory page. """
     files = []
     filenames = os.listdir(os.path.join(app.config["UPLOADS_FOLDER"], directory))
@@ -72,18 +72,21 @@ def upload(directory=None):
     if request.method == 'POST':
         file = request.files['file']
         
+        # Check if a valid file was uploaded. If not, render the 
+        # upload page.
         if file and _allowed_file(file.filename):
             filename = secure_filename(file.filename)
+            # Upload to the correct directory.
             if directory:
                 file.save(os.path.join(app.config['UPLOADS_FOLDER'],
                                        directory, filename))
             else:
                 file.save(os.path.join(app.config['UPLOADS_FOLDER'], filename))
             return redirect(url_for('docs'))
-    
+        
     loc = ''
     if directory:
-        loc ='/' + directory
+        loc = '/' + directory
         
     return render_template('upload.html', location=loc)
 

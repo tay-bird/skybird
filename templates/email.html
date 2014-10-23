@@ -5,11 +5,10 @@
 {% block sidebar %}
 
     <ul class="nav nav-sidebar">
-        <li class="active"><a href="/dash">Overview</a></li>
-        <li><a href="#">taylor@taybird.com</a></li>
+        <li><a href="/email">taylor@taybird.com</a></li>
     </ul>
     <ul class="nav nav-sidebar">
-        <li><a href="">Inbox</a></li>
+        <li class="active"><a href="">Inbox</a></li>
         <li><a href="">Sent</a></li>
         <li><a href="">Trash</a></li>
     </ul>
@@ -22,24 +21,17 @@
 
     <div class="row placeholders">
         <div class="col-xs-6 col-sm-3 placeholder">
-            <a href="">
+            <a href="#" data-title="new" data-toggle="modal" data-target="#new" data-placement="top" rel="tooltip">
                 <span class="glyphicon glyphicon-envelope"></span>
                 <h4>Send Message</h4>
             </a>
             <span class="text-muted">taylor@taybird.com</span>
         </div>
-        <div class="col-xs-6 col-sm-3 placeholder">
-            <a href="">
-                <span class="glyphicon glyphicon-calendar"></span>
-                <h4>0 Events</h4>
-            </a>
-            <span class="text-muted">Upcoming Events</span>
-        </div>
     </div>
 
     <h2 class="sub-header">New Messages</h2>
     <div class="table-responsive">
-        <table class="table table-striped" width="70%">
+        <table class="table table-striped table-hover" width="70%">
             <thead>
                 <tr>
                     <th>Name</th>
@@ -49,14 +41,134 @@
             </thead>
             <tbody>
                 {% for message in mail %}
-                    <tr>
-                        <td width="18%">{{ message['from'][0] }} - {{ message['from'][1] }}</td>
-                        <td width="20%">{{ message['subject'] }}</td>
-                        <td width="62%">{{ message['body'] }}</td>
-                    </tr>
+                        <tr data-title="view" data-toggle="modal" data-target="#view" data-placement="top"
+                        data-email-from="{{ message['from'][0] }} - {{ message['from'][1] }}"
+                        data-email-subject="{{ message['subject'] }}"
+                        data-email-body="{{ message['body'] }}"
+                        class="view-email" rel="tooltip">
+                            <td width="18%">{{ message['from'][0] }} - {{ message['from'][1] }}</td>
+                            <td width="20%">{{ message['subject'] }}</td>
+                            <td width="62%">{{ message['body-short'] }}</td>
+                        </tr>
+                    </a>
                 {% endfor %}
             </tbody>
         </table>
     </div>
 
+    <!-- New Email Dialog -->
+    <div class="modal fade" id="new" tabindex="-1" role="dialog" aria-labelledby="new" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <h4 class="modal-title custom_align" id="Heading">New Email</h4>
+                </div>
+                
+                <form method=POST enctype=multipart/form-data action="{{ url_for('send') }}">
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <input class="form-control" name="to" id="modal-to-new" type="text" placeholder="Recipient">
+                        </div>
+                        
+                        <div class="form-group">
+                            <input class="form-control" name="subject" id="modal-subject-new" type="text" placeholder="Subject">
+                        </div>
+                        
+                        <div class="form-group">
+                            <textarea rows="5" class="form-control" name="body" id="modal-body-new"></textarea>
+                        </div>
+                        
+                        <button type="submit" class="btn btn-warning btn-lg" style="width: 100%;">
+                            <span class="glyphicon glyphicon-ok-sign"></span> Send
+                        </button>
+                    </div>
+                </form>
+                
+                <div class="modal-footer">
+                    <button class="btn btn-default btn-lg" style="width: 100%;" id="cancel">
+                        <span class="glyphicon glyphicon-trash"></span> Cancel
+                    </button>
+                </div>
+                
+            </div>
+        <!-- /.modal-content --> 
+        </div>
+    <!-- /.modal-dialog --> 
+    </div>
+    <!-- End New Email Dialog -->
+
+    <!-- View Email Dialog -->
+    <div class="modal fade" id="view" tabindex="-1" role="dialog" aria-labelledby="view" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <h4 class="modal-title custom_align" id="Heading">From</h4>
+                </div>
+                
+                <div class="modal-body">
+                    <p id="modal-subject">Subject</p>
+                    <p id="modal-body">Body</p>
+                </div>
+                
+                <div class="modal-footer">
+                    <button data-title="reply" data-toggle="modal" data-target="#new" data-placement="top" 
+                    style="width: 100%;" class="btn btn-warning btn-lg" id="reply" rel="tooltip">
+                        <span class="glyphicon glyphicon-share-alt"></span> Reply
+                    </button>
+                </div>
+            </div>
+        <!-- /.modal-content --> 
+        </div>
+    <!-- /.modal-dialog --> 
+    </div>
+    <!-- End View Email Dialog -->
+
 {% endblock %}
+
+{% block scripts %}
+
+    <script>
+        // Populate the View Email Dialog when it is about to be shown.
+        $(".view-email").click(function () {
+            var emailFrom = $(this).data('email-from');
+            var emailSubject = $(this).data('email-subject');
+            var emailBody = $(this).data('email-body');
+            
+            $(".modal-title").text( emailFrom );
+            $("#modal-subject").html( "<b>Re: </b>" + emailSubject );
+            $("#modal-body").text( emailBody );
+        });
+        
+        // Populate the New Email Dialog with Reply/Forward info
+        // when it is about to be shown, if necessary.
+        $("#reply").click(function () {
+            $('#view').modal('hide'); // Close the preview modal.
+            var emailFrom = $("#Heading").text().split(" - ")[1];
+            var emailSubject = $("#modal-subject").text();
+            
+            $("#modal-to-new").val( emailFrom );
+            $("#modal-subject-new").val( emailSubject );
+        });
+
+
+        // Clear the contents of the New Email Dialog when it closes.
+        $('#new').on('hide.bs.modal', function () {
+            $("#modal-to-new").val( "" );
+            $("#modal-subject-new").val( "" );
+            $("#modal-body-new").val( "" );
+        });
+
+        // Close the New Email Dialog when the Cancel button is clicked.
+        $('#cancel').click(function () {
+            $('#new').modal('hide');
+        });
+    </script>
+    
+    <style type="text/css">
+        .table-hover tbody tr:hover td { background-color: #DCDCDC; }
+    </style>
+
+{% endblock %}
+
