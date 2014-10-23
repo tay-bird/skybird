@@ -23,7 +23,7 @@ def _read_mail(path):
     return mail
 
 @app.route("/email")
-#@login_required
+@login_required
 def email():
     """ Serve the email page. """
     mail = _read_mail(config["EMAIL"]["MAIL_STORAGE"])
