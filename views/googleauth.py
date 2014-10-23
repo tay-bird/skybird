@@ -21,6 +21,7 @@ app.config['SECRET_KEY'] = 'secret'
 @app.route('/authorize')
 @login_required
 def authorize():
+    """ Authorize the user's Google API session. """
     flow = OAuth2WebServerFlow(client_id=CLIENT_ID,
       client_secret=CLIENT_SECRET,
       scope='https://www.googleapis.com/auth/calendar',
@@ -34,8 +35,15 @@ def authorize():
 @app.route('/deauthorize')
 @login_required
 def deauthorize():
-    del session['credentials']
-    return redirect(url_for('home'))
+    """ Deauthorize the user's Google API session. """
+    storage = Storage(credential_storage + user.username + '.dat')
+    
+    try:
+        storage.delete()
+    except OSError:
+        pass  # No credential file was found.
+    
+    return redirect(url_for('cal'))
 
 @app.route('/callback')
 @login_required
