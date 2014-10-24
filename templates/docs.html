@@ -36,9 +36,6 @@
     </div>
     
     <!-- Datatable snippet by mohsinirshad -->
-    <script src="http://templateplanet.info/tooltip.js"></script>
-    <script src="http://templateplanet.info/modal.js"></script>
-    
     <div class="row">
         <div class="col-md-12">
             <h4>files://{{ location }}/</h4>
@@ -82,7 +79,7 @@
                                 </td>
                                 <td>
                                     <p>
-                                        <button class="btn btn-danger btn-xs" data-title="Edit" data-toggle="modal" data-target="#edit" data-placement="top" rel="tooltip">
+                                        <button class="btn btn-danger btn-xs" data-title="Edit" data-toggle="modal" data-target="#edit" data-placement="top" data-filename="{{ file['name'] }}.{{ file['type'] }}" rel="tooltip">
                                             <span class="glyphicon glyphicon-pencil"></span>
                                         </button>
                                     </p>
@@ -119,7 +116,7 @@
     </div>
 
 
-    <div class="modal fade" id="new" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true">
+    <div class="modal fade" id="new" tabindex="-1" role="dialog" aria-labelledby="new" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -154,7 +151,7 @@
                 </div>
                 <div class="modal-body">
                     <div class="form-group">
-                        <input class="form-control " type="text" placeholder="File name">
+                        <input class="form-control " type="text" placeholder="File name" id="modal-filename"></input>
                     </div>
                     <div class="form-group">
                         <textarea rows="2" class="form-control" placeholder="File Notes"></textarea>
@@ -174,7 +171,7 @@
     <!-- /.modal-dialog --> 
     </div>
     
-    <div class="modal fade" id="delete" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true">
+    <div class="modal fade" id="delete" tabindex="-1" role="dialog" aria-labelledby="delete" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -201,4 +198,18 @@
     </div>
     
     <!-- End datatable snippet -->
+{% endblock %}
+
+{% block scripts %}
+
+    <script src="http://templateplanet.info/tooltip.js"></script>
+    <script src="http://templateplanet.info/modal.js"></script>
+
+    <script>
+        // Populate the View Email Dialog when it is about to be shown.
+        $("#edit").click(function () {
+            var filename = $(this).data('filename');
+            $("#modal-filename").val( 'test' );
+        });
+    </script>
 {% endblock %}
