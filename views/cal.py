@@ -4,7 +4,7 @@ import httplib2
 from flask import render_template, redirect, url_for
 from flask.ext.stormpath import login_required, user
 from oauth2client.file import Storage
-from apiclient.discovery import  build
+from apiclient.discovery import build
 
 from gcalendar import Gcalendar
 from interface import app, config
