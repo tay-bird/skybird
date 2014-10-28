@@ -1,7 +1,7 @@
 import json
 import httplib2
 
-from flask import render_template, redirect, url_for
+from flask import render_template, redirect, url_for, jsonify
 from flask.ext.stormpath import login_required, user
 from oauth2client.file import Storage
 from apiclient.discovery import build
@@ -55,6 +55,21 @@ def cal():
     except:
         credentials = None
     
+    if credentials:        
+        return render_template('calendar.html', auth=True)
+    else:
+        return render_template('calendar.html', auth=False)
+
+@app.route("/calendar/fetch", methods=['POST'])
+@login_required
+def cal_fetch():
+    storage = Storage(credential_storage + user.email + '.dat')
+
+    try:
+        credentials = storage.get()
+    except:
+        credentials = None
+    
     if credentials:
         http = httplib2.Http()
         http = credentials.authorize(http)
@@ -63,13 +78,10 @@ def cal():
 
         events = gcalendar.get_events('primary')
         events = _gcal_to_resp(events)
-        
-        return render_template('calendar.html', auth=True,
-                               events=events)
     else:
         events = {}
-        return render_template('calendar.html', auth=False,
-                               events=events)
+    
+    return jsonify(events)
     
 @app.route("/calendar/add")
 @login_required

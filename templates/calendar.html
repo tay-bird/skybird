@@ -75,8 +75,7 @@
         
         <div class="days" data-group="days"> </div>
     </div>
-    <!-- End calendar -->
-    
+
     <!-- New Event Dialog -->
     <div class="modal fade" id="new" tabindex="-1" role="dialog" aria-labelledby="new" aria-hidden="true">
         <div class="modal-dialog">
@@ -123,7 +122,6 @@
             </div>
         </div>
     </div>
-    <!-- End New Event Dialog -->
     
     <!-- Event List Dialog -->
     <div class="modal fade" id="list" tabindex="-1" role="dialog" aria-labelledby="list" aria-hidden="true">
@@ -147,8 +145,7 @@
             </div>
         </div>
     </div>
-    <!-- Event List Dialog -->
-    
+
     <!-- Settings Dialog -->
     <div class="modal fade" id="settings" tabindex="-1" role="dialog" aria-labelledby="settings" aria-hidden="true">
         <div class="modal-dialog">
@@ -176,10 +173,11 @@
             </div>
         </div>
     </div>
-    <!-- End Settings Dialog -->    
+   
 {% endblock %}
 
 {% block scripts %}
+
     <!-- http://w3widgets.com/responsive-calendar/ -->
     <script src="/static/js/responsive-calendar.js"></script>
     
@@ -192,6 +190,15 @@
         $(function () {
                 $('#datetimepicker1').datetimepicker();
             });
+        
+        // Load the calendar with an ajax request.
+        function cal_fetch() {
+            // $(loadingId).show();  // Add loading ani here.
+            $.post('/calendar/fetch')
+            .done(function(events) {
+                $('.responsive-calendar').responsiveCalendar('edit', events);
+            });
+        }
     </script>
     
     <!-- This script block handles the List Dialog. -->
@@ -251,13 +258,12 @@
             },
             
             // Set the month to be displayed to the current one.
-            time: d.getFullYear() + '-' + (d.getMonth() + 1){% if auth %},{% endif %}
+            time: d.getFullYear() + '-' + (d.getMonth() + 1),
             
             // Only populate the calendar if a Google account has
             // been authorized.
-            {% if auth %}
-                events: {{ events|safe }}
-            {% endif %}
+            events: cal_fetch()
         });
     </script>
+    
 {% endblock %}  
