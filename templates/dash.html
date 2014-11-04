@@ -62,15 +62,7 @@
                     <th>Status</th>
                 </tr>
             </thead>
-            <tbody>
-                {% for ip, port, status in cons %}
-                    <tr>
-                    <td>{{ ip }}</td>
-                        <td>{{ port }}</td>
-                        <td>{{ status }}</td>
-                    </tr>
-                {% endfor %}
-            </tbody>
+            <tbody id="cons"></tbody>
         </table>
     </div>
 
@@ -87,6 +79,18 @@
                 $( '#stats_email' ).prepend( stats[ 'mail_count'] );
                 $( '#stats_uptime' ).prepend( stats[ 'uptime' ] );
                 $( '#stats_usage' ).prepend( stats[ 'usage' ] );
+                
+                var conTable = []
+                for (var i=0; i<stats[ 'cons' ].length; i++) {
+                    conTable.push(
+                        "<tr>" +
+                            "<td>" + stats[ 'cons' ][i][0] + "</td>" +
+                            "<td>" + stats[ 'cons' ][i][1] + "</td>" +
+                            "<td>" + stats[ 'cons' ][i][2] + "</td>" +
+                        "</tr>"
+                    );
+                }
+                $( '#cons' ).html(conTable);
             });
         }
         
