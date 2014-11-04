@@ -4,7 +4,7 @@ import json
 from os import getpid
 from time import time
 
-from flask import render_template
+from flask import render_template, jsonify
 from flask.ext.stormpath import login_required
 from psutil import disk_usage, Process, net_connections
 
@@ -13,10 +13,13 @@ from interface import app, config
 @app.route("/dash")
 @login_required
 def dash():
-    """ Serve the dashboard overview.
-    
-    Reads /proc/ and uses psutil to gather system stats.
-    """
+    """ Serve the dashboard overview. """
+    return render_template('dash.html')
+
+@app.route("/dash/fetch", methods=['POST'])
+@login_required
+def dash_fetch():
+    """ Fetch the stats and format them as an AJAJ response. """
     # Get Apache uptime. Not currently used. Add to full stat view?
     now = time()
     boot = Process(getpid()).create_time()
@@ -47,6 +50,13 @@ def dash():
         mail_count = len(json.loads(mail))
     except ValueError:
         mail_count = 0
-
-    return render_template('dash.html', uptime=str(uptime)[:5], usage=usage,
-                   cons=cons, mail_count=mail_count)
+    
+    mail_count = 0
+    
+    stats = { 'uptime': str(uptime)[:5],
+              'usage': usage,
+              'cons': cons,
+              'mail_count': mail_count }
+    
+    return jsonify(stats)
+             
