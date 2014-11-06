@@ -27,12 +27,6 @@
                 <h4>Upload File</h4>
             </a>
         </div>
-        <div class="col-xs-6 col-sm-3 placeholder">
-            <a href="" data-title="Edit" data-toggle="modal" data-target="#new" data-placement="top" rel="tooltip">
-                <span class="glyphicon glyphicon-folder-open"></span>
-                <h4>New Directory</h4>
-            </a>
-        </div>
     </div>
     
     <!-- Datatable snippet by mohsinirshad -->
@@ -40,54 +34,46 @@
         <div class="col-md-12">
             <h4>files://{{ location }}/</h4>
             
-                <div class="table-responsive">
-                    <table id="mytable" class="table table-bordred table-striped">
-                        <thead>
-                            <th><input type="checkbox" id="checkall" /></th>
-                            <th width="60%">Name</th>
-                            <th>Type</th>
-                            <th>Size</th>
-                            <th>Get </th>
-                            <th>Edit</th>
-                        </thead>
-                        
-                        <tbody>
-                            {% for file in files %}
-                            <tr>
-                                <td><input type="checkbox" class="checkthis" /></td>
-                                <td>
-                                    {% if file['type'] %}<a href="/docs/view/{{ file['name'] }}.{{ file['type'] }}">{{ file['name'] }}</a>{% endif %}
-                                    {% if not file['type'] %}<a href="/docs/dir/{{ file['name'] }}"><b>{{ file['name'] }}</b></a>{% endif %}
-                                </td>
-                                <td>{{ file['type'] }}</td>
-                                <td>{% if file['type'] %}{{ file['size'] }} kB{% endif %}</td>
-                                <td>
-                                    <p> 
-                                        {% if not file['type'] %}
-                                                <button class="btn btn-primary btn-xs disabled">
-                                                    <span class="glyphicon glyphicon-cloud-download"></span>
-                                                </button>
-                                        {% endif %}
-                                        {% if file['type'] %}
-                                            <a href="/docs/get/{{ file['name'] }}.{{ file['type'] }}" download="{{ file['name'] }}.{{ file['type'] }}">
-                                                <button class="btn btn-primary btn-xs">
-                                                    <span class="glyphicon glyphicon-cloud-download"></span>
-                                                </button>
+                {% for file in files %}
+                    <div class="col-md-3">
+                        <div class="panel panel-primary">
+                            <div class="row outer">
+                                <div class="col-md-12">
+                                    <a href="/docs/view/{{ file['name'] }}.{{ file['type'] }}" style="text-decoration: none;">
+                                    <div class="panel-body">
+                                        <span class="glyphicon glyphicon-star"></span>
+                                        &nbsp;
+                                        
+                                            {{ file['name'] }}{% if file['type'] %}.{{ file['type'] }}{% endif %}
+                                        
+                                        <div class="col-md-12 text-right">
+                                            <span>
+                                                {{ file['size'] }} kB
+                                            </span>
+                                        </div>
+                                    </div>
+                                    </a>
+                                    <div class="panel-footer">
+                                        <div class="col-xs-1">
+                                            <a href="/docs/get/{{ file['name'] }}.{{ file['type'] }}">
+                                                <span class="glyphicon glyphicon-save"></span> 
                                             </a>
-                                        {% endif %}
-                                    </p>
-                                </td>
-                                <td>
-                                    <p>
-                                        <button class="btn btn-danger btn-xs" data-title="Edit" data-toggle="modal" data-target="#edit" data-placement="top" data-filename="{{ file['name'] }}.{{ file['type'] }}" rel="tooltip">
-                                            <span class="glyphicon glyphicon-pencil"></span>
-                                        </button>
-                                    </p>
-                                </td>
-                            </tr>
-                            {% endfor %}
-                        </tbody>
-                    </table>
+                                        </div>
+                                        <div class="col-xs-1">
+                                            <a href="/docs/delete/{{ file['name'] }}.{{ file['type'] }}">
+                                                <span class="glyphicon glyphicon-trash"></span> 
+                                            </a>
+                                        </div>
+                                        <br />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+
+
+
                     
                     <br />
                 

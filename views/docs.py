@@ -108,7 +108,7 @@ def new():
 @app.route('/docs/delete')
 @login_required
 def delete():
-    """ Create a new directory. """
+    """ Delete a file. """
     return redirect(url_for('docs'))
 
 @app.route('/docs/view/<filename>/')
