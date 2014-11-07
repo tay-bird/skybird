@@ -35,7 +35,7 @@ def email():
         else:
             m['body-short'] = m['body']
     
-    return render_template('email.html', mail=mail)
+    return render_template('email.html', active='email', mail=mail)
 
 @app.route("/email/send", methods=['POST'])
 @login_required   

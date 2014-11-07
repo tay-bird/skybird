@@ -14,7 +14,7 @@ from interface import app, config
 @login_required
 def dash():
     """ Serve the dashboard overview. """
-    return render_template('dash.html')
+    return render_template('dash.html', active='dash')
 
 @app.route("/dash/fetch", methods=['POST'])
 @login_required

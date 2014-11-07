@@ -39,7 +39,7 @@ def docs():
                        'type': type,
                        'name': name.rsplit('.', 1)[0] })
     
-    return render_template('docs.html', location='', files=files)
+    return render_template('docs.html', active='docs', location='', files=files)
 
 @app.route("/docs/<directory>")
 @login_required
@@ -62,7 +62,7 @@ def docs_subdir(directory):
     if directory:
         loc ='/' + directory
     
-    return render_template('docs.html', location=loc, files=files)
+    return render_template('docs.html', active='docs', location=loc, files=files)
 
 @app.route("/docs/upload", methods=['GET', 'POST'])
 @app.route("/docs/upload/<directory>", methods=['GET', 'POST'])
@@ -88,7 +88,7 @@ def upload(directory=None):
     if directory:
         loc = '/' + directory
         
-    return render_template('upload.html', location=loc)
+    return render_template('upload.html', active='docs', location=loc)
 
 @app.route('/docs/new', methods=['POST'])
 @login_required

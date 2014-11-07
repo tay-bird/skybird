@@ -56,9 +56,9 @@ def cal():
         credentials = None
     
     if credentials:        
-        return render_template('calendar.html', auth=True)
+        return render_template('calendar.html', active='calendar', auth=True)
     else:
-        return render_template('calendar.html', auth=False)
+        return render_template('calendar.html', active='calendar', auth=False)
 
 @app.route("/calendar/fetch", methods=['POST'])
 @login_required

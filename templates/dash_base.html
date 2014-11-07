@@ -32,8 +32,12 @@
                 </div>
                 <div class="navbar-collapse collapse">
                     <ul class="nav navbar-nav navbar-right">
-                        <li><a href="/dash">Dashboard</a></li>
-                        <li><a href="/email">Email</a></li>
+                        <li class="visible-xs-block"><a href="/dash">Overview</a></li>
+                        <li><br></li>
+                        <li class="visible-xs-block"><a href="/email">Email</a></li>
+                        <li class="visible-xs-block"><a href="/calendar">Calendar</a></li>
+                        <li class="visible-xs-block"><a href="/docs">Document Manager</a></li>
+                        <li><br></li>
                         <li><a href="/logout">Logout</a></li>
                     </ul>
                     <form class="navbar-form navbar-right">
@@ -49,7 +53,15 @@
             
                 <!-- Sidebar -->
                 <div class="col-sm-3 col-md-2 sidebar">
-                    {% block sidebar %}{% endblock %}
+                        <ul class="nav nav-sidebar">
+                            <li{% if 'dash' == active %} class="active"{% endif %}><a href="/dash">Overview</a></li>
+                        </ul>
+                        
+                        <ul class="nav nav-sidebar">
+                            <li{% if 'email' == active %} class="active"{% endif %}><a href="/email">Email</a></li>
+                            <li{% if 'calendar' == active %} class="active"{% endif %}><a href="/calendar">Calendar</a></li>
+                            <li{% if 'docs' == active %} class="active"{% endif %}><a href="/docs">Document Manager</a></li>
+                        </ul>
                 </div>
                 
                 <!-- Main info display -->
