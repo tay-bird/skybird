@@ -34,16 +34,16 @@ assets = Environment(app)
 
 js_base = Bundle('js/jquery.js', 'js/bootstrap.js',
                  filters='rjsmin', output='gen/basepack.js')
-assets.register('js_base', js_base)
+assets.register('js_base', js_base)  # js_base
 
 js_calendar = Bundle('js/moment.js', 'js/bootstrap-datetimepicker.js',
                      'js/responsive-calendar.js', filters='jsmin',
                      output='gen/calpack.js')
-assets.register('js_calendar', js_calendar)
+assets.register('js_calendar', js_calendar)  # js_calendar
 
 js_upload = Bundle('js/upload.js', filters='jsmin',
                    output='gen/uplpack.js')
-assets.register('js_upload', js_upload)
+assets.register('js_upload', js_upload)  #js_upload
 
 # Load views.
 
