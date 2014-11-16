@@ -13,7 +13,7 @@ A valid **Stormpath API key** and **app name** must be pointed to in the
 
 ### Stats.
 Stats monitoring is provided by the **psutil** package. It is available
-online.
+[online](https://github.com/giampaolo/psutil).
 
 ### Email.
 Email functionality is provided by the **Mailchecker** package. A
@@ -21,9 +21,8 @@ valid Mailchecker **mail.json** file must be pointed to in the
 **CONFIG** file.
 
 ### Documents.
-Document management is handled with the **Flask-SQLAlchemy** extension.
-A valid **sqlite database** and an accessable **uploads folder** must be
-pointed to in the **CONFIG** file.
+Document management requires an accessible **uploads folder**
+to be pointed to in the **CONFIG** file.
 
 ## Usage.
 Import the app object from the interface package. Pass it a
