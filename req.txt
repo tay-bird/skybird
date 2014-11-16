@@ -1,6 +1,7 @@
 flask
 flask-assets
 flask-stormpath
+psutil
 wsgiref
 flup
 htmlmin

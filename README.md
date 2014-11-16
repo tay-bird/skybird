@@ -8,11 +8,11 @@ Install Skybird and all dependencies:
     mkdir skybird
     cd skybird
 
-    sudo pip install -r req.txt
-
     git clone https://taybird@bitbucket.org/taybird/skybird.git
     git clone https://taybird@bitbucket.org/taybird/mailchecker.git
     git clone https://taybird@bitbucket.org/taybird/gcalendar.git
+
+    git pip install -r interface/req.txt
 
 ## Setup.
 Now that Skybird is installed, you'll want to create a config
