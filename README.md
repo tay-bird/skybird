@@ -14,12 +14,6 @@ Install Skybird and all dependencies:
     git clone https://taybird@bitbucket.org/taybird/mailchecker.git
     git clone https://taybird@bitbucket.org/taybird/gcalendar.git
 
-### Email.
-Email functionality is provided by the [Mailchecker](https://bitbucket.org/taybird/mailchecker) package.
-
-### Calendar.
-Calendar functionality isprovided by the [Gcalendar](https://bitbucket.org/taybird/gcalendar) package.
-
 ## Setup.
 Now that Skybird is installed, you'll want to create a config
 file and a script to run the server:
