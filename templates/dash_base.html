@@ -73,8 +73,9 @@
         <!-- Footer -->
 
         <!-- Bootstrap JavaScript -->
-        <script src="/static/js/jquery.min.js"></script>
-        <script src="/static/js/bootstrap.js"></script>
+        {% assets "js_base" %}
+            <script type="text/javascript" src="{{ ASSET_URL }}"></script>
+        {% endassets %}
         
         {% block scripts %}{% endblock %}
 

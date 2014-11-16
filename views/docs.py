@@ -5,13 +5,11 @@ import os
 from flask import render_template, url_for, request
 from flask import send_from_directory, redirect
 from flask.ext.stormpath import login_required
-from flask.ext.sqlalchemy import SQLAlchemy
 from werkzeug.utils import secure_filename
 
 from interface import app, config
 
 config = config["DOC_MANAGER"]
-app.config["SQLALCHEMY_DATABASE_URI"] = config["SQLALCHEMY_DATABASE_URI"]
 app.config["UPLOADS_FOLDER"] = config["UPLOADS_FOLDER"]
 app.config['MAX_CONTENT_LENGTH'] = config["MAX_SIZE_IN_MB"] * 1024 * 1024
 

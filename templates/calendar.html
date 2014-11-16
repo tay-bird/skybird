@@ -177,10 +177,10 @@
 {% block scripts %}
 
     <!-- http://w3widgets.com/responsive-calendar/ -->
-    <script src="/static/js/responsive-calendar.js"></script>
-    
-    <script type="text/javascript" src="/static/js/moment.js"></script>
-    <script type="text/javascript" src="/static/js/bootstrap-datetimepicker.js"></script>
+    {% assets "js_calendar" %}
+        <script type="text/javascript" src="{{ ASSET_URL }}"></script>
+    {% endassets %}
+
     
     <script>
         // Initialize the date picker.
