@@ -24,6 +24,12 @@ valid Mailchecker **mail.json** file must be pointed to in the
 Document management requires an accessible **uploads folder**
 to be pointed to in the **CONFIG** file.
 
+## Installation.
+Install Skybird with these commands:
+
+    sudo pip install -r req.txt
+    git clone https://taybird@bitbucket.org/taybird/skybird.git
+
 ## Usage.
 Import the app object from the interface package. Pass it a
 randomized secret key for the session.
