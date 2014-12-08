@@ -33,9 +33,17 @@ def docs():
             type = name.rsplit('.', 1)[1]
         except IndexError:
             type = ''
+        
+        name = name.rsplit('.', 1)[0]
+        if len(name) > 22:
+            shortname = name[:12] + '...' + name[18:20]
+        else:
+            shortname = name
+        
         files.append({ 'size': os.path.getsize(path)/1024,
                        'type': type,
-                       'name': name.rsplit('.', 1)[0] })
+                       'name': name,
+                       'shortname': shortname})
     
     return render_template('docs.html', active='docs', location='', files=files)
 

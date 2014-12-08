@@ -39,12 +39,12 @@
                         <div class="panel panel-primary">
                             <div class="row outer">
                                 <div class="col-md-12">
-                                    <a href="/docs/view/{{ file['name'] }}.{{ file['type'] }}" style="text-decoration: none;">
+                                    <a href="/docs/view/{{ file['name'] }}.{{ file['type'] }}" title="{{ file['name'] }}.{{ file['type'] }}" style="text-decoration: none;">
                                     <div class="panel-body">
                                         <span class="glyphicon glyphicon-star"></span>
                                         &nbsp;
                                         
-                                            {{ file['name'] }}{% if file['type'] %}.{{ file['type'] }}{% endif %}
+                                            {{ file['shortname'] }}{% if file['type'] %}.{{ file['type'] }}{% endif %}
                                         
                                         <div class="col-md-12 text-right">
                                             <span>
