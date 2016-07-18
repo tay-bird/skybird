@@ -1,0 +1,10 @@
+flask
+flask-assets
+flask-stormpath
+psutil
+wsgiref
+flup
+htmlmin
+jsmin
+git+https://github.com/tay-bird/Gcalendar.git
+git+https://github.com/tay-bird/mailchecker.git
