@@ -7,7 +7,7 @@ from time import time
 from flask import render_template, redirect, url_for
 from flask.ext.stormpath import login_required
 
-from interface import app, config
+from skybird import app, config
 
 def _read_mail(path):
     """ Open and decode the json file at the specified path. """

@@ -1,6 +1,6 @@
 from htmlmin.main import minify
 
-from interface import app, config
+from skybird import app, config
 
 @app.after_request
 def response_minify(response):

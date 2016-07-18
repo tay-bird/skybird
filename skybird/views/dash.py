@@ -8,7 +8,7 @@ from flask import render_template, jsonify
 from flask.ext.stormpath import login_required
 from psutil import disk_usage, Process, net_connections
 
-from interface import app, config
+from skybird import app, config
 
 @app.route("/dash")
 @login_required

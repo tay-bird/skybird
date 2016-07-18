@@ -7,7 +7,7 @@ from flup.server.fcgi import WSGIServer
 from oauth2client.file import Storage
 from oauth2client.client import OAuth2WebServerFlow, OAuth2Credentials
 
-from interface import app, config
+from skybird import app, config
 
 
 config = config["CALENDAR"]

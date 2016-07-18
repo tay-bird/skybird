@@ -7,7 +7,7 @@ from oauth2client.file import Storage
 from apiclient.discovery import build
 
 from gcalendar import Gcalendar
-from interface import app, config
+from skybird import app, config
 
 config = config["CALENDAR"]
 CLIENT_ID = config["CLIENT_ID"]

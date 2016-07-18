@@ -7,7 +7,7 @@ from flask import send_from_directory, redirect
 from flask.ext.stormpath import login_required
 from werkzeug.utils import secure_filename
 
-from interface import app, config
+from skybird import app, config
 
 config = config["DOC_MANAGER"]
 app.config["UPLOADS_FOLDER"] = config["UPLOADS_FOLDER"]
